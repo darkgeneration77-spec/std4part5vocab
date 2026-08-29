@@ -3,7 +3,32 @@ function getData(){try{return JSON.parse(localStorage.getItem(KEY)||'{"themes":{
 function audio(){if(!ac){const A=window.AudioContext||window.webkitAudioContext;if(A)ac=new A()}if(ac&&ac.state==='suspended')ac.resume();return ac}function tone(f,d=.12,delay=0){if(!soundOn)return;let c=audio();if(!c)return;let o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.value=f;g.gain.value=.13;o.connect(g);g.connect(c.destination);o.start(c.currentTime+delay);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+delay+d);o.stop(c.currentTime+delay+d+.02)}function goodS(){tone(523,.12);tone(659,.13,.08);tone(784,.16,.16)}function badS(){tone(220,.12);tone(196,.16,.1)}function winS(){[523,659,784,1046].forEach((f,i)=>tone(f,.18,i*.08))}
 function toast(msg,err=false){let e=document.querySelector('.toast');e.textContent=msg;e.className='toast'+(err?' err':'');void e.offsetWidth;e.classList.add('show')}function fx(el,ok){if(ok){streak++;el&&el.classList.add('pop');toast(praise[Math.random()*praise.length|0]);goodS();if(streak>=4)confetti()}else{streak=0;el&&el.classList.add('shake');toast(encourage[Math.random()*encourage.length|0],true);badS()}setTimeout(()=>el&&el.classList.remove('pop','shake'),500)}function confetti(){let cols=['#ffc928','#f59b23','#f3c4c7','#cfe8cf','#7a4a2e'];for(let i=0;i<18;i++){let p=document.createElement('i');p.className='piece';p.style.left=(45+Math.random()*10)+'vw';p.style.top='22vh';p.style.background=cols[i%cols.length];p.style.setProperty('--x',(Math.random()*260-130)+'px');p.style.setProperty('--y',(120+Math.random()*230)+'px');p.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(p);setTimeout(()=>p.remove(),950)}}
 function norm(s){return(s||'').trim().toLowerCase().replace(/\s+/g,' ')}function pattern(w){return[...w].map((c,i)=>/[a-z]/i.test(c)?(i===0?c:'_'):c).join(' ')}function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function speak(w){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(w);u.lang='en-GB';u.rate=.82;u.volume=1;speechSynthesis.speak(u)}
+let britishVoice=null;
+function chooseBritishVoice(){
+  if(!('speechSynthesis' in window))return null;
+  const vs=speechSynthesis.getVoices();
+  const preferred=['Google UK English Female','Microsoft Sonia Online (Natural) - English (United Kingdom)','Microsoft Ryan Online (Natural) - English (United Kingdom)','Daniel','Serena','Kate','Stephanie'];
+  britishVoice=preferred.map(n=>vs.find(v=>v.name===n)).find(Boolean)
+    || vs.find(v=>/^en-GB$/i.test(v.lang))
+    || vs.find(v=>/^en[-_]GB/i.test(v.lang))
+    || null;
+  return britishVoice;
+}
+if('speechSynthesis' in window){
+  chooseBritishVoice();
+  speechSynthesis.onvoiceschanged=chooseBritishVoice;
+}
+function speak(w){
+  if(!('speechSynthesis'in window))return;
+  speechSynthesis.cancel();
+  let u=new SpeechSynthesisUtterance(w);
+  u.lang='en-GB';
+  u.rate=.72;
+  u.pitch=1;
+  u.volume=1;
+  u.voice=chooseBritishVoice();
+  speechSynthesis.speak(u);
+}
 function refreshStatus(id){let d=getData(),x=d.themes[id]||{},best=x.best,st=best===8?3:best>=6?2:best>=4?1:0;let b=document.querySelector('#bestBadge'),s=document.querySelector('#starBadge'),l=document.querySelector('#wrongList');if(b)b.textContent='Best: '+(best===undefined?'—':best)+' / 8';if(s)s.textContent='★'.repeat(st)+'☆'.repeat(3-st);let arr=Object.values(d.wrong||{}).filter(x=>x.theme===id);if(l)l.innerHTML=arr.length?arr.map(x=>`<span class="wrongchip">${esc(x.word)} ← ${esc(x.typed||'blank')}</span>`).join(''):'<span>No wrong words yet.</span>'}
 function render(){const id=window.THEME_ID||1,t=window.THEME,main=document.querySelector('main');document.title=`Theme ${id} — Word Scoop`;document.querySelector('#themeTitle').textContent=t.title;let rows=t.words.map((w,i)=>`<tr><td>${i+1}</td><td><b>${w.word}</b><button class="speak" data-word="${esc(w.word)}">Speak</button></td><td>${w.zh}</td><td>${w.definition}</td><td>${w.clue}</td></tr>`).join('');let qs=t.words.map((w,i)=>`<div class="q" data-a="${esc(w.word)}"><b>${i+1}.</b> ${w.definition}<div class="pattern">${pattern(w.word)}</div><input class="answer" autocomplete="off" spellcheck="false"></div>`).join('');main.innerHTML+=`<section class="theme" id="themeBox"><h2>Theme ${id}</h2><p><b>${t.title}</b></p><div class="theme-status"><span class="resultbadge" id="bestBadge">Best: — / 8</span><span class="resultbadge" id="starBadge">☆☆☆</span><span>Progress saves automatically</span></div><div class="modebar"><b>Mode:</b><button class="modebtn active" id="practiceMode">Practice</button><button class="modebtn" id="testMode">Test</button></div><details><summary>Open Notes</summary><div class="tablewrap"><table><thead><tr><th>#</th><th>Word</th><th>华语</th><th>Definition</th><th>Key Clue</th></tr></thead><tbody>${rows}</tbody></table></div></details><section class="practice"><h3>Spelling Practice — 8 Questions</h3>${qs}<div class="row"><button class="btn" id="check">Check Answers</button><button class="btn" id="reset">Reset</button></div><div class="score" id="score">Score: 0 / 8</div></section><section class="wrongbox"><h3>Wrong Words Revision</h3><div class="wronglist" id="wrongList"></div><button class="btn clearwrong" id="clearWrong">Clear revised words</button></section><section class="game"><h3 id="gtitle"></h3><div id="garea"></div></section></section>`;
 document.querySelector('#check').onclick=check;document.querySelector('#reset').onclick=()=>{document.querySelectorAll('.answer').forEach(x=>{x.value='';x.classList.remove('good','bad')});document.querySelector('#score').textContent='Score: 0 / 8'};document.querySelector('#practiceMode').onclick=()=>{themeBox.classList.remove('test-mode');practiceMode.classList.add('active');testMode.classList.remove('active')};document.querySelector('#testMode').onclick=()=>{themeBox.classList.add('test-mode');testMode.classList.add('active');practiceMode.classList.remove('active')};document.querySelector('#clearWrong').onclick=()=>{let d=getData();Object.keys(d.wrong||{}).forEach(k=>{if(d.wrong[k].theme===id)delete d.wrong[k]});saveData(d);refreshStatus(id)};document.querySelectorAll('.speak').forEach(b=>b.onclick=()=>speak(b.dataset.word));refreshStatus(id);startGame(t)}
