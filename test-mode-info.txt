@@ -1,0 +1,1 @@
+Test mode: pressing Start Test locks Notes, Practice, Listen and Shuffle for the current page session.
