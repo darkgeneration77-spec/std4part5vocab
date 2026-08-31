@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" role="img" aria-label="3D illustration of a globe, aeroplane, suitcase and passport for Countries and Nationalities">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9fe4ff"/><stop offset="1" stop-color="#eafaff"/></linearGradient>
+  <radialGradient id="globe" cx="34%" cy="25%" r="78%"><stop stop-color="#66c9ff"/><stop offset=".58" stop-color="#209fe7"/><stop offset="1" stop-color="#0875bd"/></radialGradient>
+  <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c9ef57"/><stop offset="1" stop-color="#75ba2d"/></linearGradient>
+  <linearGradient id="case" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9a447"/><stop offset="1" stop-color="#9b5723"/></linearGradient>
+  <linearGradient id="pass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1d58a5"/><stop offset="1" stop-color="#0b315f"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#5a351c" flood-opacity=".22"/></filter>
+  <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<rect width="900" height="430" rx="42" fill="url(#sky)"/>
+<ellipse cx="474" cy="377" rx="352" ry="34" fill="#66a63a" opacity=".28" filter="url(#soft)"/>
+<g fill="#fff" opacity=".94">
+  <g transform="translate(68 82)"><circle cx="34" cy="28" r="28"/><circle cx="65" cy="18" r="38"/><circle cx="104" cy="31" r="27"/><rect x="32" y="29" width="75" height="28" rx="14"/></g>
+  <g transform="translate(690 52) scale(.72)"><circle cx="34" cy="28" r="28"/><circle cx="65" cy="18" r="38"/><circle cx="104" cy="31" r="27"/><rect x="32" y="29" width="75" height="28" rx="14"/></g>
+</g>
+<g filter="url(#shadow)">
+  <circle cx="522" cy="200" r="142" fill="url(#globe)" stroke="#0c6da8" stroke-width="7"/>
+  <path d="M458 91c-25 11-47 35-41 55 8 26 39 22 54 39 12 14-7 29-1 44 7 18 36 11 51 19 22 12 14 41 35 52 22 11 44-10 48-33 3-20-7-38 4-54 9-14 31-12 40-28 11-21-15-39-38-36-24 3-42 24-63 16-20-7-22-36-43-49-15-9-32-13-46-25z" fill="url(#land)" stroke="#5b9b24" stroke-width="4"/>
+  <path d="M604 115c22 3 42 18 48 35 6 15-7 28-19 38-11 10-23 20-21 35 3 21 33 30 36 52 2 16-12 33-27 38-18 7-36-2-43-18-7-17 2-33-4-49-7-19-31-24-39-42-8-18 8-38 25-48 15-10 28-20 44-41z" fill="url(#land)" stroke="#5b9b24" stroke-width="4"/>
+  <path d="M425 224c-23 6-38 28-32 45 6 18 30 25 40 43 7 13 5 29 17 39 13 11 33 8 42-5 8-12 4-28-5-39-8-10-20-16-23-29-4-17 12-32 6-45-7-15-28-14-45-9z" fill="url(#land)" stroke="#5b9b24" stroke-width="4"/>
+</g>
+<g transform="translate(202 64) rotate(-9)" filter="url(#shadow)">
+  <path d="M0 60c48-26 101-35 158-27l82 12c19 3 23 24 5 32l-77 34c-45 20-93 21-142 4L0 106z" fill="#fff" stroke="#b8c8d6" stroke-width="5"/>
+  <path d="M126 46l53-37 22 4-28 45z" fill="#f05a3e"/>
+  <path d="M107 101l59 35 22-4-31-44z" fill="#f05a3e"/>
+  <path d="M22 65L1 35l16-3 36 27z" fill="#f05a3e"/>
+  <ellipse cx="238" cy="61" rx="25" ry="18" fill="#2f83c7"/>
+  <g fill="#2f83c7"><circle cx="72" cy="62" r="5"/><circle cx="91" cy="58" r="5"/><circle cx="110" cy="55" r="5"/><circle cx="129" cy="54" r="5"/></g>
+</g>
+<g transform="translate(285 258)" filter="url(#shadow)">
+  <rect x="0" y="25" width="195" height="124" rx="26" fill="url(#case)" stroke="#75401f" stroke-width="6"/>
+  <path d="M68 27V9c0-8 7-14 15-14h31c8 0 15 6 15 14v18" fill="none" stroke="#75401f" stroke-width="10" stroke-linecap="round"/>
+  <rect x="18" y="39" width="26" height="95" rx="10" fill="#bd6d2d" opacity=".75"/><rect x="151" y="39" width="26" height="95" rx="10" fill="#bd6d2d" opacity=".75"/>
+  <circle cx="76" cy="80" r="18" fill="#fff5d8" stroke="#7a4a2e" stroke-width="3"/><path d="M66 80h20M76 70v20" stroke="#e14848" stroke-width="4"/>
+  <rect x="105" y="55" width="38" height="26" rx="7" fill="#fff" transform="rotate(8 105 55)"/><path d="M110 61h28v14h-28z" fill="#1f6cb8"/><path d="M110 68h28M124 61v14" stroke="#fff" stroke-width="3"/>
+</g>
+<g transform="translate(490 275) rotate(-5)" filter="url(#shadow)">
+  <rect width="116" height="145" rx="14" fill="url(#pass)" stroke="#082a51" stroke-width="6"/>
+  <text x="58" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="900" fill="#ffdf5f">PASSPORT</text>
+  <circle cx="58" cy="83" r="28" fill="none" stroke="#ffdf5f" stroke-width="4"/><path d="M30 83h56M58 55v56M39 64c15 16 15 38 0 38M77 64c-15 16-15 38 0 38" fill="none" stroke="#ffdf5f" stroke-width="3"/>
+</g>
+<g filter="url(#shadow)" fill="#8b673d" stroke="#6f4b2a" stroke-width="4">
+  <g transform="translate(690 174)"><rect x="0" y="58" width="42" height="129" rx="6"/><polygon points="21,0 6,58 36,58" fill="#6f4b2a"/><rect x="6" y="91" width="30" height="15" rx="5" fill="#f7d79c"/><circle cx="21" cy="99" r="8" fill="#fff4d8"/></g>
+  <g transform="translate(752 197)"><path d="M25 0l-18 164h36z" fill="#6e6662"/><path d="M25 30L2 86h46zM25 65L0 133h50z" fill="none" stroke="#4b4745" stroke-width="5"/><path d="M10 164h30"/></g>
+  <g transform="translate(814 220)"><path d="M5 0h55l-7 154H12z" fill="#e7d0a2"/><path d="M8 31h49M7 60h48M9 90h44M10 120h42" stroke="#c1a474" stroke-width="8"/></g>
+</g>
+<g transform="translate(620 315)" filter="url(#shadow)">
+  <path d="M70 18c0-26-22-47-49-47s-49 21-49 47c0 37 49 78 49 78s49-41 49-78z" fill="#ef4e42" stroke="#a82c28" stroke-width="5"/><circle cx="21" cy="18" r="17" fill="#fff2dc"/>
+</g>
+<g fill="#fff" opacity=".88"><circle cx="606" cy="98" r="19"/><circle cx="631" cy="90" r="27"/><circle cx="658" cy="103" r="18"/></g>
+</svg>
